@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.ymh.springbootstudent.dao.StudentMapper" >
+  <resultMap id="BaseResultMap" type="org.ymh.springbootstudent.entity.Student" >
+    <id column="student_id" property="studentId" jdbcType="INTEGER" />
+    <result column="student_name" property="studentName" jdbcType="VARCHAR" />
+    <result column="math_score" property="mathScore" jdbcType="INTEGER" />
+    <result column="english_score" property="englishScore" jdbcType="INTEGER" />
+    <result column="java_score" property="javaScore" jdbcType="INTEGER" />
+    <result column="computer_score" property="computerScore" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    student_id, student_name, math_score, english_score, java_score, computer_score
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_student
+    where student_id = #{studentId,jdbcType=INTEGER}
+  </select>
+  <select id="getAllStudent" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from tb_student
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from tb_student
+    where student_name = #{studentName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_student
+    where student_id = #{studentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.ymh.springbootstudent.entity.Student" >
+    insert into tb_student (student_id, student_name, math_score, 
+      english_score, java_score, computer_score
+      )
+    values (#{studentId,jdbcType=INTEGER}, #{studentName,jdbcType=VARCHAR}, #{mathScore,jdbcType=INTEGER}, 
+      #{englishScore,jdbcType=INTEGER}, #{javaScore,jdbcType=INTEGER}, #{computerScore,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.ymh.springbootstudent.entity.Student" >
+    insert into tb_student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="studentName != null" >
+        student_name,
+      </if>
+      <if test="mathScore != null" >
+        math_score,
+      </if>
+      <if test="englishScore != null" >
+        english_score,
+      </if>
+      <if test="javaScore != null" >
+        java_score,
+      </if>
+      <if test="computerScore != null" >
+        computer_score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="studentName != null" >
+        #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="mathScore != null" >
+        #{mathScore,jdbcType=INTEGER},
+      </if>
+      <if test="englishScore != null" >
+        #{englishScore,jdbcType=INTEGER},
+      </if>
+      <if test="javaScore != null" >
+        #{javaScore,jdbcType=INTEGER},
+      </if>
+      <if test="computerScore != null" >
+        #{computerScore,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.ymh.springbootstudent.entity.Student" >
+    update tb_student
+    <set >
+      <if test="studentName != null" >
+        student_name = #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="mathScore != null" >
+        math_score = #{mathScore,jdbcType=INTEGER},
+      </if>
+      <if test="englishScore != null" >
+        english_score = #{englishScore,jdbcType=INTEGER},
+      </if>
+      <if test="javaScore != null" >
+        java_score = #{javaScore,jdbcType=INTEGER},
+      </if>
+      <if test="computerScore != null" >
+        computer_score = #{computerScore,jdbcType=INTEGER},
+      </if>
+    </set>
+    where student_id = #{studentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.ymh.springbootstudent.entity.Student" >
+    update tb_student
+    set student_name = #{studentName,jdbcType=VARCHAR},
+      math_score = #{mathScore,jdbcType=INTEGER},
+      english_score = #{englishScore,jdbcType=INTEGER},
+      java_score = #{javaScore,jdbcType=INTEGER},
+      computer_score = #{computerScore,jdbcType=INTEGER}
+    where student_id = #{studentId,jdbcType=INTEGER}
+  </update>
+</mapper>

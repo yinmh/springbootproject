@@ -1,0 +1,162 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="author" content=""></meta>
+    <link rel="icon" href="../../../../favicon.ico" th:src="@{/favicon.ico}"></link>
+
+    <title>学生信息</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.css}"></link>
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet" th:href="@{/css/dashboard.css}"></link>
+  </head>
+
+  <body>
+    <div th:replace="base::#topbar"></div>
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="#" th:href="@{/getstudent}" method="get">
+                  <span data-feather="home"></span>
+                  全部学生成绩 <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file"></span>
+                  ObjectScore
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="shopping-cart"></span>
+                  Products
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="users"></span>
+                  Customers
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="bar-chart-2"></span>
+                  Reports
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="layers"></span>
+                  Integrations
+                </a>
+              </li>
+            </ul>
+
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Saved reports</span>
+              <a class="d-flex align-items-center text-muted" href="#">
+                <span data-feather="plus-circle"></span>
+              </a>
+            </h6>
+            <ul class="nav flex-column mb-2">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Current month
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Last quarter
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Social engagement
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Year-end sale
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Find</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group mr-2">
+                <button class="btn btn-sm btn-outline-secondary">Share</button>
+                <button class="btn btn-sm btn-outline-secondary">Export</button>
+              </div>
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                This week
+              </button>
+            </div>
+          </div>
+          <a class="btn btn-sm btn-success" href="/" th:href="@{/add}">添加学生</a>
+          <a class="btn btn-sm btn-success" href="/" th:href="@{/select}">查询单科平均分</a>
+          <a class="btn btn-sm btn-success" href="/" th:href="@{/findname}">查询学生成绩通过姓名</a>
+          <h2>Student List</h2>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>id</th>
+                  <th>name</th>
+                  <th>math</th>
+                  <th>English</th>
+                  <th>java</th>
+                  <th>computer</th>
+                  <th>operator</th>
+                </tr>
+              </thead>
+              <tbody>
+              <!--<tr>-->
+                <!--<td th:text="${student.studentId}"></td>-->
+                <!--<td th:text="${student.studentName}"></td>-->
+                <!--<td th:text="${student.mathScore}"></td>-->
+                <!--<td th:text="${student.englishScore}"></td>-->
+                <!--<td th:text="${student.javaScore}"></td>-->
+                <!--<td th:text="${student.computerScore}"></td>-->
+              <!--</tr>-->
+
+               <tr th:each="student :${list}">
+                  <td th:text="${student.studentId}"></td>
+                  <td th:text="${student.studentName}"></td>
+                  <td th:text="${student.mathScore}"></td>
+                  <td th:text="${student.englishScore}"></td>
+                  <td th:text="${student.javaScore}"></td>
+                  <td th:text="${student.computerScore}"></td>
+                 <td>
+                   <a class="btn btn-sm btn-primary left" th:href="@{/edit/}+${student.studentId}">编辑</a>
+                     <form th:action="@{/deletestudent/}+${student.studentId}" class="float-left">
+                       <button class="btn btn-sm btn-danger left">删除</button>
+                     </form>
+                 </td>
+               </tr>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

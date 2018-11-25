@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"></meta>
+    <title>Student Management</title>
+    <style>
+        .head {
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        li {
+            list-style: none;
+            margin: 0 auto;
+        }
+
+        a {
+            font-size: 25px;
+        }
+
+        .list > li {
+            list-style: none;
+            width: 250px;
+            height: 100px;
+            text-align: center;
+            background-color: red;
+            padding-top: 18px;
+            border-radius: 10%;
+        }
+
+        .list > li:hover {
+            border: 1px solid orange;
+        }
+
+        .one_a:hover {
+            color: yellow;
+        }
+
+        .one_a {
+            text-decoration: none;
+            font-size: 25px;
+            color: white;
+            font-weight: 700;
+        }
+
+        .two {
+            width: 700px;
+            margin: 0 auto;
+            font-size: 25px;
+            margin-top: 50px;
+            height: 300px;
+        }
+
+        .in {
+            margin-top: 15px;
+            width: 300px;
+            height: 30px;
+            font-size: 25px;
+            border: 1px solid gray;
+            float: left;
+        }
+
+        .find {
+            text-decoration: none;
+            color: yellow;
+            display: block;
+            height: 32px;
+            width: 50px;
+            float: left;
+            margin-top: 15px;
+            background-color: rgba(255, 0, 0, 0.41);
+            border: 1px solid gray;
+        }
+        .find:hover{
+            color: white;
+            background-color: red;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+
+        .three {
+            width: 600px;
+            margin: 0 auto;
+            height: 800px;
+            border: 1px solid orange;
+        }
+        .three>form>input{
+            margin-left: 150px;
+            margin-top: 50px;
+        }
+        .three>form>button{
+            margin-left: 150px;
+            margin-top: 50px;
+            width: 150px;
+            height: 32px;
+            font-size: 20px;
+        }
+        .three>form>p{
+            margin-left: 150px;
+            margin-top: 50px;
+            width: 150px;
+            height: 32px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="head">
+    <h1>Student Management System</h1>
+    <h2>Version 1.0x</h2>
+</div>
+
+<div class="two">
+    <form th:action="@{/msgbyname}" method="get">
+        <input type="text" name="sname" class="in" placeholder="请输入学生姓名"></input>
+        <button class="find" type="submit" >查询</button>
+        <p style="color:red" th:text="${msg}" ></p>
+    </form>
+</div>
+
+</body>
+</html>
